@@ -57,6 +57,7 @@
       }
       else if (userGuess === computerGuess){
         wins++; guessesLeft = 9;    //increase wins and reset Guesses Left to 9
+        alert("YAY!  You guessed correct! Keep it up!!!");
         userGuessAr = [];           //resetting array of UserGuesses to empty
       }
           console.log(userGuess);
@@ -66,7 +67,7 @@
           "<p>Losses: " + losses + "</p>" +
           "<p>Guesses left: " + guessesLeft + "</p>" +
           "<p>You chose so far: " + userGuessAr + "</p>" +
-          "<p>The computer chose: " + computerGuess + "</p>"
+          "<p>Kean is thinking of: " + computerGuess + "</p>"
 
         // Set the inner HTML contents of the #game div to our html string
         document.querySelector("#game").innerHTML = html;
