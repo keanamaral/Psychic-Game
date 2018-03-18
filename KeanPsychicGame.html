@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Kean's Psychic Game</title>
+<style>
+#refpgbutton{
+  height: 100px;
+  width: 150px;
+  position: fixed;
+  left: 350px;
+  top: 100px;
+}
+</style>
+</head>
+
+<body>
+  <h1>Welcome to Kean's Psychic Game!</h1>
+  <p>Guess what letter (from a to z) I am thinking of</p>
+  <div id="game">
+    <p>Press a letter on your key board to start playing!</p>
+  </div>
+
+  <input id="refpgbutton" type="button" value="Restart Game" onClick="window.location.reload()">
+
+  <script type="text/javascript">
+    // Creates an array that lists out all of the options (from a-z)
+    var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+    "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+    // Creating & initiating needed variables
+    var wins = 0;
+    var losses = 0;
+    var guessesLeft = 9;
+    var userGuessAr = [];  //array to store user guesses
+
+    // This function is run whenever the user presses a key.
+    document.onkeyup = function(event) {
+
+      // Determines which key was pressed.
+      var userGuess = String.fromCharCode(event.which).toLowerCase();
+
+      // Randomly chooses a choice from the computerChoices array & puts into computerGuess.
+      var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+      //if letter is not pressed alert user
+      if (computerChoices.indexOf(userGuess)===-1){
+        alert("Please enter letter from a-z only")
+      }
+      else if ((userGuess != computerGuess) && (guessesLeft === 0)){
+        losses++; guessesLeft = 9;    //increase wins and reset Guesses Left to 9
+        userGuessAr = [];             //resetting array of UserGuesses to empty
+      }
+      else if (userGuess != computerGuess){
+        guessesLeft--; userGuessAr.push(userGuess); //adding new guess to array
+        console.log(userGuessAr);
+      }
+      else if (userGuess === computerGuess){
+        wins++; guessesLeft = 9;    //increase wins and reset Guesses Left to 9
+        userGuessAr = [];           //resetting array of UserGuesses to empty
+      }
+          console.log(userGuess);
+          console.log(computerGuess);
+          var html =
+          "<p>Wins: " + wins + "</p>" +
+          "<p>Losses: " + losses + "</p>" +
+          "<p>Guesses left: " + guessesLeft + "</p>" +
+          "<p>You chose so far: " + userGuessAr + "</p>" +
+          "<p>The computer chose: " + computerGuess + "</p>"
+
+        // Set the inner HTML contents of the #game div to our html string
+        document.querySelector("#game").innerHTML = html;
+      };
+
+  </script>
+
+</body>
+
+</html>
